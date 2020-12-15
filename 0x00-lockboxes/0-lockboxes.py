@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 ''' Is a script to implementing lock boxes '''
 
+
 def canUnlockAll(boxes):
     ''' This function return a boolena to mean about if all boxes can be
     opened, else return  false couse the boxes will not opened'''
@@ -30,7 +31,7 @@ def canUnlockAll(boxes):
                 i -= 1
                 break
 
-        if (validate == False and i == end - 1) or (total_len == counter):
+        if (not validate and i == end - 1) or (total_len == counter):
             break
 
         # means reach the end of the boxes
