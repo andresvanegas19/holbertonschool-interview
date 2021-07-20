@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  algo:
+    volumes:
+      - .:/code
+    image: holbertonschool/ubuntu-1604-gcc5
+    container_name: holb
