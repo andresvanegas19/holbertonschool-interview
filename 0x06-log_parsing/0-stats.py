@@ -16,7 +16,7 @@ HTTP_STATUS = {
 
 
 if __name__ == "__main__":
-
+    """ Generate script to parce http status code """
     size = 0
     try:
         for line in sys.stdin:
