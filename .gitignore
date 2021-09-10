@@ -2,6 +2,7 @@ cycle
 betty-style.pl
 0-sandpiles
 palindrome
+0-generator.py
 0-node
 1-heap_insert
 env
