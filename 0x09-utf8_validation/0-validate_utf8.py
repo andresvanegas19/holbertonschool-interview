@@ -19,28 +19,30 @@ def validUTF8(data):
     bit_n = 0
 
     for value_converted in data:
-        binary = format(value_converted, '#010b')[-8:]
+        binary = 1 << 7
 
         if bit_n == 0:
-
-            for bit in binary:
-                if bit == '0':
-                    break
-
-                bit_n = 1 + bit_n
-
-            if bit_n == 0:
+            while binary & value_converted:
+                # begging on UTF-8 char
+                bit_n += 1
+                binary = binary >> 1
+            if bit_n == 0:  # 1 byte char
                 continue
-
             if bit_n == 1 or bit_n > 4:
                 return False
+
         else:
-            validate = (
-                binary[0] == '1' and binary[1] == '0'
-            )
-            if not validate:
+            if not (
+                # significant bit
+                #  byte == hay un UTF-8 char
+                value_converted & 1 << 7
+                and
+                # significant bit
+                # validate two most significant bits
+                not (value_converted & 1 << 6)
+            ):
                 return False
 
-        bit_n = 1 - bit_n
+        bit_n -= 1
 
     return bit_n == 0
