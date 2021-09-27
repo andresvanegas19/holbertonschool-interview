@@ -35,8 +35,7 @@ def validUTF8(data):
             if not (
                 # significant bit
                 #  byte == hay un UTF-8 char
-                value_converted & 1 << 7
-                and
+                value_converted & 1 << 7 and
                 # significant bit
                 # validate two most significant bits
                 not (value_converted & 1 << 6)
