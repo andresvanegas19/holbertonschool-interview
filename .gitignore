@@ -6,6 +6,9 @@ palindrome
 0-node
 1-heap_insert
 env
+0-slide_line
+.vscode
+
 # my garbage files
 .DS_Store
 *main*
