@@ -9,49 +9,51 @@
  */
 void sl_left(int *line, size_t size)
 {
-    int count, i, j = 0;
+    size_t i = 0, j = 0, k = 0;
 
-    for (; i < (int)size; i++)
+    for (i = 0, j = 0; i < size;)
     {
-        if (i == (int)size - 1)
+        if (line[i] == 0)
         {
-            line[count] = line[i];
-            count++;
+            for (; line[i] == 0;)
+                i++;
         }
 
-        if (line[i] == 0)
-            continue;
+        if (i == (size - 1))
+            break;
 
-        for (j = i + 1; j < (int)size; j++)
+        j = i + 1;
+
+        if (line[j] == 0)
         {
-            if (line[j] == 0 && j == (int)size - 1)
-            {
-                line[count] = line[i];
-                count++;
-            }
+            for (; line[j] == 0;)
+                j++;
+        }
 
-            if (line[j] == 0)
-                continue;
+        if (line[i] == line[j])
+        {
+            line[i] = line[i] + line[j];
+            line[j] = 0;
+            i = j + 1;
+        }
+        else
+        {
+            i++;
+        }
 
-            if (line[i] == line[j])
-            {
-                line[count] = line[i] * 2;
-                count++;
-                i = j;
-                break;
-            }
+        j = 0;
+    }
 
-            if (line[i] != line[j])
-            {
-                line[count] = line[i];
-                count++;
-                break;
-            }
+    for (i = 0, k = 0; i < size; i++)
+    {
+        if (line[i] != 0)
+        {
+            line[k++] = line[i];
         }
     }
 
-    for (i = count; i < (int)size; i++)
-        line[i] = 0;
+    while (k < size)
+        line[k++] = 0;
 }
 
 /**
@@ -61,51 +63,51 @@ void sl_left(int *line, size_t size)
  * to the direction represented by direction
  * @size: size of the array.
  */
-void sl_right(int *line, size_t size)
+void sl_right(int *line, int size2)
 {
-    int count, i, j = 0;
-    count = size - 1;
+    int i, j = size2 - 1, sw = 0;
 
-    for (i = count; i >= 0; i--)
+    for (i = size2 - 1; i >= 0; i--)
     {
-        if (i == 0)
+        if (line[i] != 0)
         {
-            line[count] = line[i];
-            count--;
-        }
-
-        if (line[i] == 0)
-            continue;
-
-        for (j = i - 1; j >= 0; j--)
-        {
-            if (line[j] == 0 && j == 0)
-            {
-                line[count] = line[i];
-                count--;
-            }
-
-            if (line[j] == 0)
-                continue;
-
-            if (line[i] == line[j])
-            {
-                line[count] = line[i] * 2;
-                count--;
-                i = j;
-                break;
-            }
-
-            if (line[i] != line[j])
-            {
-                line[count] = line[i];
-                count--;
-                break;
-            }
+            line[j] = line[i];
+            j--;
         }
     }
 
-    for (i = count; i >= 0; i--)
+    if (j >= 0)
+        line[j] = 0;
+
+    for (i = size2 - 1; i >= 0; i--)
+    {
+        if (i > j && line[i] == line[i - 1])
+        {
+            sw = 1;
+            line[i] += line[i - 1];
+            line[i - 1] = 0;
+        }
+        else if (i <= j)
+        {
+            line[i] = 0;
+        }
+    }
+
+    if (sw == 1 && j >= 0)
+        line[0] = 0;
+
+    j = size2 - 1;
+
+    for (i = size2 - 1; i >= 0; i--)
+    {
+        if (line[i] != 0)
+        {
+            line[j] = line[i];
+            j--;
+        }
+    }
+
+    for (i = 0; i <= j; i++)
         line[i] = 0;
 }
 
