@@ -64,8 +64,9 @@ void sl_left(int *line, size_t size)
 void sl_right(int *line, size_t size)
 {
     int count, i, j = 0;
+    count = size - 1;
 
-    for (count, i = size - 1; i >= 0; i--)
+    for (i = count; i >= 0; i--)
     {
         if (i == 0)
         {
