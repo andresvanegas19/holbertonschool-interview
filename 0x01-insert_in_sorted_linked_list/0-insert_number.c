@@ -10,40 +10,52 @@
  */
 listint_t *insert_node(listint_t **head, int number)
 {
-	listint_t *new_node = NULL, *cp_head = *head;
+	listint_t *ph /* pointer head */, *bh /* behing */, *nnode /* new node */;
 
-	new_node = malloc(sizeof(*head));
-	if (new_node == NULL)
+	if (head == NULL)
 		return (NULL);
 
-	new_node->n = number; new_node->next = NULL;
-
-	if (number < 0)
+	nnode = malloc(sizeof(listint_t));
+	if (nnode == NULL)
 		return (NULL);
 
-	if (head == NULL || number == 0)
+	bh = *head;
+	nnode->n = number;
+	nnode->next = NULL;
+
+	if (*head == NULL)
 	{
-		*head = new_node; return (new_node);
+		*head = nnode;
+		return (nnode);
 	}
 
-
-	while (*head != NULL)
+	if (number <= bh->n)
 	{
-		if ((*head)->next == NULL)
+		nnode->next = *head;
+		*head = nnode;
+		return (nnode);
+	}
+
+	ph = bh->next;
+
+	while (ph != NULL)
+	{
+		if (ph->n >= number)
 		{
-			(*head)->next = new_node;
-			*head = cp_head;
-			return (new_node);
+			nnode->next = ph;
+			bh->next = nnode;
+			break;
 		}
 
-		if (number <= (*head)->next->n)
+		if (ph->n < number && ph->next == NULL)
 		{
-			new_node->next = (*head)->next;
-			(*head)->next = new_node;
-			*head = cp_head;
-			return (new_node);
+			ph->next = nnode;
+			break;
 		}
-		*head = (*head)->next;
+
+		bh = bh->next;
+		ph = ph->next;
 	}
-	return (NULL);
+
+	return (nnode);
 }
