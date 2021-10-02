@@ -1,5 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "lists.h"
 
 /**
@@ -9,21 +7,19 @@
  *
  * Return: 1 or otherwise 0;
  */
-int check_recursive_palindrome(listint_t **init, listint_t *last)
+int check_recursive_palindrome(listint_t **left, listint_t *right)
 {
-	int status_palindrome = -1;
+	int result;
 
-	if (last == NULL)
+	if (right == NULL)
+	{
 		return (1);
+	}
 
-	/* this will check if the init and last are equal and always return 0*/
-	return (check_recursive_palindrome(init, last->next) == 0);
+	result = check_recursive_palindrome(left, right->next) && (*left)->n == right->n;
 
-	status_palindrome = ((*init)->n == last->n) ? 1 : 0;
-
-	*init = (*init)->next;
-
-	return (status_palindrome);
+	*left = (*left)->next;
+	return (result);
 }
 
 /**
