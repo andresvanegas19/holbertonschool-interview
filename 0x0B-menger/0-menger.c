@@ -11,7 +11,7 @@ void menger(int level)
 	int i_size = pow(3, level);
 
 	int i_row = 0, i_rhigh = 0, i_colum = 0, i_chigh = 0;
-	char c_print = "#";
+	char c_print = '#';
 
 	if (level < 0)
 	{
