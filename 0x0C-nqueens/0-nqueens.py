@@ -20,7 +20,7 @@ line, and exit with the status 1
 from sys import argv
 
 
-def validate_table(large):
+def validate_table(solve, temp):
     """
     Validate the table
 
@@ -30,23 +30,20 @@ def validate_table(large):
     Returns:
         [type]: [description]
     """
-    l_R = len(large) - 1
+    for row in solve:
+        if row[1] == temp[1]:
+            return False
 
-    difference = 0
+        if (row[0] + row[1]) == (temp[0] + temp[1]):
+            return False
 
-    for i in range(l_R):
-        difference = large[i] - large[l_R]
-
-        if difference < 0:
-            difference *= -1
-
-        if difference == 0 or difference == l_R - i:
+        if (row[0] - row[1]) == (temp[0] - temp[1]):
             return False
 
     return True
 
 
-def resolve_quens(dim, row, large, outcome):
+def resolve_quens(income, row, solve):
     """
     resolve the code
 
@@ -56,20 +53,17 @@ def resolve_quens(dim, row, large, outcome):
         large (list): [description]
         outcome (list): [description]
     """
-    if row == dim:
-        print(outcome)
+    if (row == income):
+        print(solve)
 
     else:
-        for col in range(0, dim):
-            large.append(col)
-            outcome.append([row, col])
-            cond = validate_table(large)
+        for col in range(income):
+            temp = [row, col]
 
-            if (cond):
-                resolve_quens(dim, row + 1, large, outcome)
-
-            large.pop()
-            outcome.pop()
+            if validate_table(solve, temp):
+                solve.append(temp)
+                resolve_quens(row + 1, income, solve)
+                solve.remove(temp)
 
 
 if __name__ == "__main__":
@@ -87,5 +81,4 @@ if __name__ == "__main__":
             N,
             0,
             [],
-            []
         )
