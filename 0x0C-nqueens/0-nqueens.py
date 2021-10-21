@@ -34,7 +34,7 @@ def validate_table(large):
 
     difference = 0
 
-    for i in range(0, l_R):
+    for i in range(l_R):
         difference = large[i] - large[l_R]
 
         if difference < 0:
@@ -73,6 +73,9 @@ def resolve_quens(dim, row, large, outcome):
 
 
 if __name__ == "__main__":
+    if len(argv) != 2:  # validate not more args
+        exit(1)
+
     try:
         N = int(argv[1])
     except BaseException:  # Validate the number
