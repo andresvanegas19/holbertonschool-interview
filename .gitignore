@@ -9,6 +9,7 @@ insert
 env
 0-slide_line
 .vscode
+binary_tree_print.c
 
 # my garbage files
 .DS_Store
