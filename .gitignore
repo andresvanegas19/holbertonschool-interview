@@ -11,6 +11,8 @@ env
 .vscode
 binary_tree_print.c
 0-sorted_array_to_avl
+skiplist
+0-linear_skip
 
 # my garbage files
 .DS_Store
