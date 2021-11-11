@@ -1,1 +1,1 @@
-Is project to practice for interview jobs
+Is project to practice for interview job
