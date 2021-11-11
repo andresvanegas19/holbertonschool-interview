@@ -1,26 +1,33 @@
 #!/usr/bin/node
 
 const request = require("request");
-const link = `https://swapi-api.hbtn.io/api/films/${process.argv[2]}`;
 
-/**
- * @description Function that returns the number of characters in a film
- * @param {string} link
- * @returns {number}
- */
-request(link, async function (error, resp, body) {
-  if (error) console.log(error);
+void (async function () {
+  try {
+    const movieId = process.argv[2];
+    const url = `https://swapi-api.hbtn.io/api/${movieId}/`;
 
-  const characters = await JSON.parse(body).characters;
-  for (const character of characters) {
-    const rep = await new Promise((resolve, reject) => {
-      request(character, function (err, rp, bd) {
-        if (err) reject(err);
+    request(url, async function (error, response, body) {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      const characters = JSON.parse(body).characters;
+      for (const character of characters) {
+        const res = await new Promise((resolve, reject) => {
+          request(character, (err, res, html) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(JSON.parse(html).name);
+            }
+          });
+        });
 
-        resolve(JSON.parse(bd).name);
-      });
+        console.log(res);
+      }
     });
-
-    console.log(rep);
+  } catch (catchErr) {
+    console.log(catchErr);
   }
-});
+})();
