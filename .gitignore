@@ -16,6 +16,7 @@ skiplist
 node_modules
 package-lock.json
 package.json
+0-advanced_binary
 
 # my garbage files
 .DS_Store
