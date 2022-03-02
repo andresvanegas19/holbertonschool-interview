@@ -1,8 +1,8 @@
 #include "binary_trees.h"
 
 /**
- * is_binary_search_tree - checks if tree is a binary search tree
- * @node: current node being checked
+ * is_valid_avl - checks if tree is a binary search tree
+ * @tree: current node being checked
  * @min: integer indicating the left boundary of the current node's value
  * @max: integer indicating the right boundary of the current node's value
  * @height: height of the current binary tree level
