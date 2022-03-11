@@ -1,4 +1,5 @@
 #include "holberton.h"
+#include <stdio.h>
 
 /**
  * wildcmp - compares two strings
@@ -10,42 +11,35 @@
  */
 int wildcmp(char *s1, char *s2)
 {
-    int i, j;
+	int i = 1;
+	int v_return = 0;
 
-    i = 0;
-    j = 0;
+	if (!(*s1))
+	{
+		/* printf("num %d\n", *s1); */
+		if (*s2 == '*')
+		{
+			return (wildcmp(s1, s2 + i));
+		}
+		else
+		{
+			return (*s2 == '\0');
+		}
+	}
 
-    while (s1[i] != '\0' && s2[j] != '\0')
-    {
-        if (s1[i] =! '*')
-        {
-            while (s2[j] != '\0' && s2[j] != s1[i + 1])
-                j++;
-            if (s2[j] == '\0')
-                return (0);
-            j++;
-            i++;
-        }
-        else if (s1[i] != s2[j])
-            return (0);
-        else
-            i++;
-        j++;
-    }
-    if (s1[i] == '\0' && s2[j] == '\0')
-        return (1);
-    if (s1[i] == '\0' && s2[j] != '\0')
-    {
-        while (s2[j] != '\0' && s2[j] == '*')
-            j++;
-        if (s2[j] == '\0')
-            return (1);
-        else
-            return (0);
-    }
+	if (*s2 == '*')
+	{
+		/* comparing the right to left */
+		return (wildcmp(s1 + i, s2) || wildcmp(s1, s2 + i));
+	}
 
-    if (s1[i] != '\0' && s2[j] == '\0')
-        return (0);
+	if (*s1 == *s2)
+	{
+		s1 += i;
+		s2 += i;
+		return (wildcmp(s1, s2));
+	}
+	/* printf("num %d\n", *s1); */
 
-    return (0);
+	return (v_return);
 }
