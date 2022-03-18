@@ -20,6 +20,7 @@ node_modules
 package-lock.json
 package.json
 0-advanced_binary
+0-wildcmp
 
 # my garbage files
 .DS_Store
