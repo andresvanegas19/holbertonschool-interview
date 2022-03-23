@@ -21,6 +21,7 @@ package-lock.json
 package.json
 0-advanced_binary
 0-wildcmp
+a.out
 
 # my garbage files
 .DS_Store
