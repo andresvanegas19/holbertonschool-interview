@@ -29,6 +29,7 @@ unsigned long hash(const char *s, int end)
  * @length: length of the words of var words
  * @count: and interation space to liberate the memory
  * @hashes: will be the hashing value
+ * @words: the pp of the words
  * @s: the string
  * @res: the space of the response
  * @n: size of result array
